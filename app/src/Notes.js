@@ -5,8 +5,6 @@ import LoginForm from './components/LoginForm.js'
 import NoteForm from './components/NoteForm.js'
 import { useNotes } from './hooks/useNotes.js'
 import { useUser } from './hooks/useUser.js'
-import Table from 'react-bootstrap/Table'
-import Button from 'react-bootstrap/Button'
 
 const Notes = () => {
     const { notes, addNote, toggleImportanceOf } = useNotes()
@@ -78,24 +76,19 @@ const Notes = () => {
             }
 
             <div>
-                <Button className='mt-3 mb-3' onClick={() => setShowAll(!showAll)}>
+                <button onClick={() => setShowAll(!showAll)}>
                     show {showAll ? 'important' : 'all'}
-                </Button>
+                </button>
             </div>
-            <Table striped>
-                <tbody>
+            <ul>
                 {notesToShow.map((note, i) =>
-                    <tr key={note.id}>
-                       
                     <Note
+                        key={i}
                         note={note}
                         toggleImportance={() => toggleImportanceOfNote(note.id)}
-                        />
-                       
-                    </tr>
-                    )}
-                </tbody>
-            </Table>
+                    />
+                )}
+            </ul>
         </div>
     )
 }

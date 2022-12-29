@@ -1,7 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react'
 import PropTypes from 'prop-types'
 import i18n from '../i18n/index'
-import Button from 'react-bootstrap/Button'
 
 const Togglable = forwardRef(({ children, buttonLabel = 'show' }, ref) => {
     const [visible, setVisible] = useState(false)
@@ -20,14 +19,14 @@ const Togglable = forwardRef(({ children, buttonLabel = 'show' }, ref) => {
     return (
         <div>
             <div style={hideWhenVisible}>
-                <Button onClick={toggleVisibility}>{buttonLabel}</Button>
+                <button onClick={toggleVisibility}>{buttonLabel}</button>
             </div>
 
             <div style={showWhenVisible}>
                 {children}
-                <Button onClick={toggleVisibility}>
+                <button onClick={toggleVisibility}>
                     {i18n.TOGGABLE.CANCEL_BUTTON}
-                </Button>
+                </button>
             </div>
 
         </div>
