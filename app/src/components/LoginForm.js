@@ -1,42 +1,48 @@
-import React from "react"
-import Togglable from "./Togglable"
-import ProTypes from 'prop-types'
+import React,{useState} from 'react'
+import PropTypes from 'prop-types'
 
-export default function LoginForm({handleSubmit,...props}) {
+const useField = ({ type }) => {
+    const [value, setValue] =useState('')
+    const onChange = (event) => {
+        setValue(event.target.value)
+    }
+    return {
+        type,
+        value,
+        onChange
+    }
+}
+
+
+export default function LoginForm({ handleSubmit, ...props }) {
+    const username = useField({ type: 'text' })
+    const password = useField({ type: 'password' })
     return (
-        <Togglable buttonLabel='Show Login' >
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <input
-                        type="text"
-                        value={props.username}
-                        name="Username"
-                        placeholder="Username"
-                        onChange={props.handleUsernameChange}
-                    />
-                </div>
-                <div>
-                    <input
-                        type="password"
-                        value={props.password}
-                        name="Password"
-                        placeholder="Password"
-                        onChange={props.handlePasswordChange}
-                    />
-                </div>
-                <button id='form-login-button'>
-                    login
-                </button>
-            </form>
-          
-        </Togglable>
+        <form onSubmit={handleSubmit}>
+            <div>
+                <input
+                   {...username}
+                    placeholder='Username'
+                    onChange={username.onChange}
+                />
+            </div>
+            <div>
+                <input
+                    {...password}
+                    name='Password'
+                    placeholder='Password'
+ 
+                />
+            </div>
+            <button id='form-login-button'>
+                Login
+            </button>
+        </form>
     )
 }
 
 LoginForm.propTypes = {
-    handleSubmit: ProTypes.func.isRequired,
-    username: ProTypes.string.isRequired,
-    password: ProTypes.string.isRequired,
-    handleUsernameChange: ProTypes.func.isRequired,
-    handlePasswordChange: ProTypes.func.isRequired
+    handleSubmit: PropTypes.func.isRequired,
+    username: PropTypes.string
+
 }

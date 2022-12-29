@@ -32,7 +32,7 @@ export default function NoteForm({ addNote, handleLogout }) {
                     value={newNote}
                     onChange={handleChange}
                 />
-                <button type="submit">save</button>
+                <button type='submit'>save</button>
             </form>
             <div>
                 <button onClick={handleLogout}>
