@@ -1,43 +1,33 @@
-import React,{useState} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-
-const useField = ({ type }) => {
-    const [value, setValue] =useState('')
-    const onChange = (event) => {
-        setValue(event.target.value)
-    }
-    return {
-        type,
-        value,
-        onChange
-    }
-}
-
+import { Form, Button } from 'react-bootstrap'
 
 export default function LoginForm({ handleSubmit, ...props }) {
-    const username = useField({ type: 'text' })
-    const password = useField({ type: 'password' })
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <input
-                   {...username}
+        <Form onSubmit={handleSubmit}>
+            <Form.Group id="username" className="mt-3">
+                <Form.Control 
+                    type='text'
+                    value={props.username}
+                    name='Username'
                     placeholder='Username'
-                    onChange={username.onChange}
+                    onChange={props.handleUsernameChange}
                 />
-            </div>
-            <div>
-                <input
-                    {...password}
+            </Form.Group>
+
+            <Form.Group id="password" className="mt-3">
+                <Form.Control
+                    type='password'
+                    value={props.password}
                     name='Password'
                     placeholder='Password'
- 
+                    onChange={props.handlePasswordChange}
                 />
-            </div>
-            <button id='form-login-button'>
+            </Form.Group>
+            <Button id='form-login-button' className="mt-3">
                 Login
-            </button>
-        </form>
+            </Button>
+        </Form>
     )
 }
 

@@ -15,7 +15,7 @@ if (!connectionString) {
 mongoose.set('strictQuery', false)
 mongoose.connect(connectionString, {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
+    useUnifiedTopology: true
 })
     .then(() => {
         console.log('Database connected')
