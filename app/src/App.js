@@ -1,7 +1,6 @@
-/* eslint-disable no-restricted-globals */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
 
+import React  from 'react';
+import {BrowserRouter,Link, Route} from 'react-router-dom';
 
 const Home = () => <h1>Home</h1>
 
@@ -14,39 +13,23 @@ const inlineStyles = {
 }
 
 const App = () => {
-  const [page, setPage] = useState(() => {
-    const { pathname } = window.location
-    const page = pathname.slice(1)
-    return page
-  })
-
-  const getContent = () => {
-    switch (page) {
-      case 'notes':
-        return <Notes />
-      case 'users':
-        return <Users />
-      default:
-        return <Home />
-    }
-  }
-
-
-  const toPage = page => event => {
-    window.history.pushState(null, '', `/${page}`)
-    event.preventDefault()
-    setPage(page)
-  }
-
-  return (
-    <div>
+   return (
+    <BrowserRouter>
       <header>
-        <a href='#' onClick={toPage('home')} style={inlineStyles}>home</a>
-        <a href='#' onClick={toPage('notes')} style={inlineStyles}>notes</a>
-        <a href='#' onClick={toPage('users')} style={inlineStyles}>users</a>
+        <Link to='/'  style={inlineStyles}>home</Link>
+        <Link to='/notes' style={inlineStyles}>notes</Link>
+        <Link to='/users'  style={inlineStyles}>users</Link>
       </header>
-      {getContent()}
-    </div>
+      <Route path='/notes'>
+        <Notes />
+      </Route>
+      <Route path='/users'>
+        <Users />
+      </Route>
+       <Route path='/'>
+         <Home />
+       </Route>
+    </BrowserRouter>
   )
 }
 
